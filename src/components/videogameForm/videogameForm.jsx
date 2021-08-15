@@ -36,6 +36,7 @@ export default function VideogameForm({ type }) {
 				.then((res) => {
 					getVideogameById(res.token, query.id)
 						.then((res) => {
+							console.log(res)
 							setOriginalDate(res)
 							setSelectedConsole({
 								id: res.console[0]._id,
@@ -118,6 +119,7 @@ export default function VideogameForm({ type }) {
 				_id: selectedDeveloper.id,
 				name: selectedDeveloper.value,
 			},
+			image: formData.image,
 			name: formData.name,
 			description: formData.description,
 			year: formData.year,
@@ -126,6 +128,7 @@ export default function VideogameForm({ type }) {
 				name: selectedConsole.value,
 			},
 		}
+		console.log(game)
 
 		if (type === 'edit') {
 			setLoading(true)
@@ -136,7 +139,8 @@ export default function VideogameForm({ type }) {
 				.catch((err) => console.error(err))
 		} else {
 			if (selectedConsole && selectedDeveloper) {
-				console.log('!')
+				console.log('create new')
+				setLoading(true)
 				saveNewGame(token, game)
 					.then((res) => {
 						console.log('saveNewGame', res)
@@ -144,6 +148,7 @@ export default function VideogameForm({ type }) {
 					})
 					.catch((err) => {
 						console.error(err)
+						setLoading(true)
 					})
 			}
 		}
@@ -194,6 +199,25 @@ export default function VideogameForm({ type }) {
 					<ErrorMessage
 						errors={errors}
 						name="year"
+						render={({ message }) => <span className="error">{message}</span>}
+					/>
+				</div>
+
+				<div className="input__group">
+					<label className="label">Image(url):</label>
+					<input
+						className="input"
+						name="image"
+						type="text"
+						placeholder="Paste an image url"
+						{...register('image', {
+							required: 'This fild is required',
+						})}
+						defaultValue={(originalData && originalData.image) || ''}
+					/>
+					<ErrorMessage
+						errors={errors}
+						name="name"
 						render={({ message }) => <span className="error">{message}</span>}
 					/>
 				</div>
