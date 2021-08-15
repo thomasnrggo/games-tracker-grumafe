@@ -41,6 +41,7 @@ $fontSize: 18px;
 	background: $container_color !important;
 	border: none !important;
 	font-size: $fontSize;
+	min-width: 80px;
 }
 
 .select__control--is-focused {
