@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+$font: 'Roboto', sans-serif;
+$light: 300;
+$normal: 400;
+$bold: 700;
+
+$black: #292929;
+$gray: #444444;
+$white: #ededed;
+$primary_color: #ee5178;
+
+$bg_color: $black;
+$container_color: $gray;
+$text_color: $white;
+
+$accent_color: $primary_color;
+$erro_color: $primary_color;
+$success_color: #9ef844;
+
+$padding: 8px;
+$border_radius: 8px;
+$border_width: 1px;

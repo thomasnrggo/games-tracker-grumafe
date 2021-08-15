@@ -1,0 +1,19 @@
+@import '../styles/_vars';
+
+.buttom {
+	margin-top: 12px;
+	padding: $padding;
+	font-size: 20px;
+	background: transparent;
+	color: $accent_color;
+	border-radius: $border_radius;
+	min-width: 250px;
+	border: 1px solid $accent_color;
+	cursor: pointer;
+	transition: ease 0.4s;
+
+	&:hover {
+		background: $accent_color;
+		color: $text_color;
+	}
+}

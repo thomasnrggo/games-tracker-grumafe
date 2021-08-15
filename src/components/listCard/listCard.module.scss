@@ -1,0 +1,93 @@
+@import '../../styles/_vars';
+
+.listCard__container {
+	background-color: $container_color;
+	color: $text_color;
+	padding: $padding;
+	border-radius: $border-radius;
+	margin-bottom: 12px;
+
+	.listCard__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: $padding;
+
+		.head {
+			display: flex;
+
+			.thumbnail {
+				width: 100px;
+				height: 100px;
+				border-radius: $border-radius;
+			}
+
+			.header__title {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				padding: $padding;
+
+				.name {
+					margin: 0;
+					font-size: 24px;
+					font-weight: $bold;
+					cursor: pointer;
+				}
+				.year {
+					margin: 0;
+					font-weight: $light;
+					font-size: 18px;
+				}
+			}
+		}
+		.trigger {
+			cursor: pointer;
+			transition: ease 0.4s;
+			&.open {
+				transform: rotate(90deg);
+			}
+
+			svg {
+				min-height: 18px;
+				min-width: 18px;
+			}
+		}
+	}
+
+	.listCard__content {
+		padding: $padding;
+		display: none;
+		transition: 0.4s ease;
+
+		&.open {
+			display: flex;
+			justify-content: flex-start;
+			flex-direction: column;
+		}
+
+		.group {
+			display: flex;
+			justify-content: space-between;
+
+			.detail__group {
+				width: 40%;
+			}
+		}
+
+		.detail__group {
+			padding: $padding;
+			font-size: 18px;
+
+			.label {
+				margin: 0;
+				font-weight: $light;
+			}
+			.detail {
+				margin: 0;
+				font-weight: $normal;
+				overflow-x: auto;
+			}
+		}
+	}
+}

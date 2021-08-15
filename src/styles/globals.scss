@@ -1,0 +1,40 @@
+@import './_vars';
+@import './_input';
+@import './_buttom';
+
+html,
+body {
+	font-family: $font;
+	font-weight: $light;
+	background: $bg_color;
+	color: $text_color;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.container {
+	max-width: 620px;
+	margin: 0 auto;
+}
+
+.section__header {
+	display: flex;
+	align-items: center;
+	&.between {
+		justify-content: space-between;
+	}
+
+	svg {
+		margin-right: 12px;
+		cursor: pointer;
+		min-width: 18px;
+		min-height: 18px;
+	}
+}

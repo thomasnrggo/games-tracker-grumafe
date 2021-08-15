@@ -1,0 +1,71 @@
+@import '../styles/_vars';
+
+$fontSize: 18px;
+
+.input__group {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 12px;
+
+	.label {
+		font-weight: $light;
+		color: $text_color;
+		margin-bottom: 8px;
+		font-size: $fontSize;
+		text-transform: capitalize;
+	}
+
+	.input {
+		background: $container_color;
+		padding: 12px;
+		outline: none;
+		border: none;
+		color: $text_color;
+		border-radius: $border_radius;
+		font-size: $fontSize;
+		font-weight: $light;
+	}
+	textarea {
+		font-family: $font;
+	}
+
+	.error {
+		color: $accent_color;
+		margin-top: 8px;
+	}
+}
+
+// react-select custom style
+
+.select__control {
+	background: $container_color !important;
+	border: none !important;
+	font-size: $fontSize;
+}
+
+.select__control--is-focused {
+	box-shadow: 0 0 0 1px $accent_color !important;
+}
+
+.select__single-value {
+	color: $white !important;
+}
+
+.select__menu {
+	background-color: darken($color: $container_color, $amount: 5%) !important;
+	color: $white;
+	box-shadow: none !important;
+
+	.select__option {
+		cursor: pointer;
+		font-size: $fontSize;
+	}
+
+	.select__option--is-focused {
+		background-color: lighten($color: $container_color, $amount: 5%) !important;
+	}
+
+	.select__option--is-selected {
+		background-color: $accent_color !important;
+	}
+}
