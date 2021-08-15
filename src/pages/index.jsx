@@ -19,9 +19,9 @@ export default function Home() {
 	const [query, setQuery] = useState('')
 	const [loading, setLoading] = useState(true)
 	const [currentPage, setCurrentPage] = useState(0)
-	const [PageSize, setPageSize] = useState(options[0].value)
+	const [PageSize, setPageSize] = useState(options[2].value)
 	const [pageCount, setPageCount] = useState(0)
-	const [selectedPageSize, setSelectedPageSize] = useState(options[0])
+	const [selectedPageSize, setSelectedPageSize] = useState(options[2])
 	const [data, setData] = useState([])
 
 	useEffect(() => {}, [data, query, selectedPageSize])

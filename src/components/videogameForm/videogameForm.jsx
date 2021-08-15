@@ -32,12 +32,10 @@ export default function VideogameForm({ type }) {
 
 	useEffect(() => {
 		if (type === 'edit') {
-			console.log(type)
 			getToken('anthony')
 				.then((res) => {
 					getVideogameById(res.token, query.id)
 						.then((res) => {
-							console.log('detail', res)
 							setOriginalDate(res)
 							setSelectedConsole({
 								id: res.console[0]._id,
@@ -133,7 +131,6 @@ export default function VideogameForm({ type }) {
 			setLoading(true)
 			updateVideogame(token, query.id, game)
 				.then((res) => {
-					console.log('put', res)
 					router.push('/')
 				})
 				.catch((err) => console.error(err))
