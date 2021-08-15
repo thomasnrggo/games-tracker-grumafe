@@ -65,3 +65,14 @@ a {
 		bottom: 100% !important;
 	}
 }
+
+.loader__container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 20vh;
+}
+
+.list__container {
+	padding-bottom: 80px;
+}

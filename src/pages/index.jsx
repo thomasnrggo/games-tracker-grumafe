@@ -6,6 +6,7 @@ import { getToken, getVideogames } from '../utils/services'
 import { useRouter } from 'next/router'
 import ReactPaginate from 'react-paginate'
 import Select from 'react-select'
+import Loader from '../components/loader/loader'
 
 const options = [
 	{ value: '4', label: '4' },
@@ -23,7 +24,7 @@ export default function Home() {
 	const [selectedPageSize, setSelectedPageSize] = useState(options[0])
 	const [data, setData] = useState([])
 
-	useEffect(() => {}, [query, selectedPageSize])
+	useEffect(() => {}, [data, query, selectedPageSize])
 
 	const handleQueryChange = (e) => {
 		setQuery(e.target.value)
@@ -71,7 +72,9 @@ export default function Home() {
 						console.error(err)
 					})
 					.finally(() => {
-						setLoading(false)
+						setTimeout(() => {
+							setLoading(false)
+						}, 1000)
 					})
 			})
 			.catch((err) => {
@@ -108,10 +111,10 @@ export default function Home() {
 					{/* //TODO: add loading */}
 
 					{loading ? (
-						<h2>Loading</h2>
+						<Loader />
 					) : (
 						<>
-							<section>
+							<section className="list__container">
 								{data.length >= 1 &&
 									data.map((game) => <ListCard key={game._id} game={game} />)}
 							</section>
