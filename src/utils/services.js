@@ -46,3 +46,17 @@ export const saveNewGame = async (token, game) => {
 	})
 	return res.data
 }
+
+export const updateVideogame = async (token, id, game) => {
+	let res = await axios.put(`${API}/api/videogames/${id}`, game, {
+		headers: { Authorization: `${token}` },
+	})
+	return res.data
+}
+
+export const getVideogameById = async (token, id) => {
+	let res = await axios.get(`${API}/api/videogames/${id}`, {
+		headers: { Authorization: `${token}` },
+	})
+	return res.data.videogame
+}

@@ -5,10 +5,12 @@ import {
 	getDevelopersCatalog,
 	getToken,
 	saveNewGame,
+	updateVideogame,
+	getVideogameById,
 } from '../../utils/services'
 import { useForm } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import Loader from '../loader/loader'
 
 export default function VideogameForm({ type }) {
@@ -19,13 +21,46 @@ export default function VideogameForm({ type }) {
 	const [showErrors, setShowErrors] = useState(false)
 	const [token, setToken] = useState('')
 	const [loading, setLoading] = useState(true)
+	const [originalData, setOriginalDate] = useState({})
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm()
+	const router = useRouter()
+	const { query } = router
 
 	useEffect(() => {
+		if (type === 'edit') {
+			console.log(type)
+			getToken('anthony')
+				.then((res) => {
+					getVideogameById(res.token, query.id)
+						.then((res) => {
+							console.log('detail', res)
+							setOriginalDate(res)
+							setSelectedConsole({
+								id: res.console[0]._id,
+								value: res.console[0].name,
+								label: res.console[0].name,
+								type: 'console',
+							})
+							setSelectedDeveloper({
+								id: res.developer._id,
+								value: res.developer.name,
+								label: res.developer.name,
+								type: 'dev',
+							})
+						})
+						.catch((err) => {
+							console.error(err)
+						})
+				})
+				.catch((err) => {
+					console.error(err)
+				})
+		}
+
 		getToken('user').then((token) => {
 			setToken(token.token)
 			getConsoleCatalog(token.token)
@@ -61,7 +96,7 @@ export default function VideogameForm({ type }) {
 					setLoading(false)
 				})
 		})
-	}, [])
+	}, [type])
 
 	const handleSelected = (e) => {
 		e.type === 'dev'
@@ -77,33 +112,43 @@ export default function VideogameForm({ type }) {
 		}
 	}
 
-	const onSubmit = (data) => {
+	const onSubmit = (formData) => {
 		validateSelect()
 		let game = {
-			_id: 'nrggo',
+			...originalData,
 			developer: {
 				_id: selectedDeveloper.id,
 				name: selectedDeveloper.value,
 			},
-			name: data.name,
-			description: data.description,
-			year: data.year,
+			name: formData.name,
+			description: formData.description,
+			year: formData.year,
 			console: {
 				_id: selectedConsole.id,
 				name: selectedConsole.value,
 			},
 		}
 
-		if (selectedConsole && selectedDeveloper) {
-			console.log('!')
-			saveNewGame(token, game)
+		if (type === 'edit') {
+			setLoading(true)
+			updateVideogame(token, query.id, game)
 				.then((res) => {
-					console.log('saveNewGame', res)
+					console.log('put', res)
 					router.push('/')
 				})
-				.catch((err) => {
-					console.error(err)
-				})
+				.catch((err) => console.error(err))
+		} else {
+			if (selectedConsole && selectedDeveloper) {
+				console.log('!')
+				saveNewGame(token, game)
+					.then((res) => {
+						console.log('saveNewGame', res)
+						router.push('/')
+					})
+					.catch((err) => {
+						console.error(err)
+					})
+			}
 		}
 	}
 
@@ -124,6 +169,7 @@ export default function VideogameForm({ type }) {
 							},
 							required: 'This fild is required',
 						})}
+						defaultValue={(originalData && originalData.name) || ''}
 					/>
 					<ErrorMessage
 						errors={errors}
@@ -146,6 +192,7 @@ export default function VideogameForm({ type }) {
 							},
 							required: 'This fild is required',
 						})}
+						defaultValue={(originalData && originalData.year) || ''}
 					/>
 					<ErrorMessage
 						errors={errors}
@@ -196,6 +243,7 @@ export default function VideogameForm({ type }) {
 							},
 							required: 'This fild is required',
 						})}
+						defaultValue={(originalData && originalData.description) || ''}
 					/>
 					<ErrorMessage
 						errors={errors}
