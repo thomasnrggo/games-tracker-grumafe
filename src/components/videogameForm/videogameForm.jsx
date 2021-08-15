@@ -36,7 +36,6 @@ export default function VideogameForm({ type }) {
 				.then((res) => {
 					getVideogameById(res.token, query.id)
 						.then((res) => {
-							console.log(res)
 							setOriginalDate(res)
 							setSelectedConsole({
 								id: res.console[0]._id,
@@ -128,7 +127,6 @@ export default function VideogameForm({ type }) {
 				name: selectedConsole.value,
 			},
 		}
-		console.log(game)
 
 		if (type === 'edit') {
 			setLoading(true)
@@ -139,11 +137,9 @@ export default function VideogameForm({ type }) {
 				.catch((err) => console.error(err))
 		} else {
 			if (selectedConsole && selectedDeveloper) {
-				console.log('create new')
 				setLoading(true)
 				saveNewGame(token, game)
 					.then((res) => {
-						console.log('saveNewGame', res)
 						router.push('/')
 					})
 					.catch((err) => {
