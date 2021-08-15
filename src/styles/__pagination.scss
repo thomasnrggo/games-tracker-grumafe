@@ -1,0 +1,43 @@
+@import './_vars';
+
+.pagination__container {
+	display: flex;
+	list-style: none;
+	align-items: center;
+	padding: 0;
+
+	.page__container {
+		padding: 12px;
+		margin: 0 4px;
+		min-width: 42px;
+		min-height: 42px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: $border_radius;
+		border: 1px solid $gray;
+		color: $white;
+		transition: ease 0.4s;
+
+		a {
+			cursor: pointer;
+		}
+
+		&:hover {
+			border-color: $accent_color;
+			color: $accent_color;
+			background: $bg_color;
+		}
+
+		&.active {
+			border-color: $accent_color;
+			color: $accent_color;
+			background: $bg_color;
+		}
+	}
+
+	.change__page {
+		@extend .page__container;
+		min-width: 60px;
+	}
+}
