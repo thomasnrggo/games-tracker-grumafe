@@ -94,9 +94,11 @@ export default function Home() {
 				<div className="container">
 					<div className="section__header between">
 						<h1>Your games</h1>
-						<button onClick={() => router.push('/new')} className="buttom">
-							Add game
-						</button>
+						<div className=" xs__fixed">
+							<button onClick={() => router.push('/new')} className="buttom">
+								Add game
+							</button>
+						</div>
 					</div>
 					<div className="input__group">
 						<input

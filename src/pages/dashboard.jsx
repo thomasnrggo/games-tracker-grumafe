@@ -88,6 +88,8 @@ export default function Dashboard(props) {
 					/>
 					<h1>Dashboard</h1>
 				</div>
+				<h4>Videogames by console:</h4>
+
 				{loading ? (
 					<LoaderComponent />
 				) : (
@@ -109,7 +111,7 @@ export default function Dashboard(props) {
 									)
 								})}
 							</div>
-							<div>
+							<div className="pie__container">
 								<RadialChart
 									data={grapData}
 									width={300}

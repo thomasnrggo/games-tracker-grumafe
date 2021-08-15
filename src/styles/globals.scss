@@ -20,6 +20,14 @@ a {
 	box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+	margin: 4px 0;
+}
+
 .container {
 	max-width: 620px;
 	margin: 0 auto;
@@ -29,6 +37,8 @@ a {
 .section__header {
 	display: flex;
 	align-items: center;
+	margin-bottom: 8px;
+
 	&.between {
 		justify-content: space-between;
 	}
@@ -55,9 +65,19 @@ a {
 	align-items: center;
 	display: flex;
 	justify-content: space-between;
+
+	@media screen and (max-width: 414px) {
+		width: auto;
+		flex-direction: column-reverse;
+		margin-bottom: 100px;
+	}
+
 	&.fixed {
 		position: fixed;
 		bottom: 0;
+		@media screen and (max-width: 414px) {
+			position: relative;
+		}
 	}
 
 	.select__menu {
@@ -75,11 +95,20 @@ a {
 
 .list__container {
 	padding-bottom: 80px;
+	@media screen and (max-width: 414px) {
+		padding-bottom: 12px;
+	}
 }
 
 .grah__container {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column-reverse;
+
+	.pie__container {
+		display: flex;
+		justify-content: center;
+		margin: 24px 0;
+	}
 
 	.legends__container {
 		width: 95%;
@@ -108,5 +137,24 @@ a {
 		width: 25px;
 		height: 25px;
 		border-radius: $border_radius;
+	}
+}
+
+.xs__fixed {
+	@media screen and (max-width: 414px) {
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		background: $bg_color;
+		z-index: 999;
+		padding-bottom: 24px;
+		display: flex;
+		justify-content: center;
+		border-top: 1px solid $container_color;
+
+		.buttom {
+			width: 90%;
+			margin: 12px 0;
+		}
 	}
 }

@@ -1,0 +1,35 @@
+@import '../../styles/_vars';
+
+.header__container {
+	width: 100%;
+	position: sticky;
+	top: 0;
+	background: $bg_color;
+	z-index: 99;
+	margin: 0;
+
+	display: flex;
+	justify-content: flex-end;
+
+	.menu__container {
+		display: flex;
+
+		.menu__item {
+			list-style: none;
+			padding: $padding;
+			transition: 0.4s ease;
+			color: $accent_color;
+
+			&:hover {
+				color: $text_color;
+			}
+
+			&.active {
+				a {
+					color: $text_color;
+					border-bottom: 1px solid $text_color;
+				}
+			}
+		}
+	}
+}

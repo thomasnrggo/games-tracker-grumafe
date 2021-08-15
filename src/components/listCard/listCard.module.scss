@@ -20,6 +20,10 @@
 				width: 100px;
 				height: 100px;
 				border-radius: $border-radius;
+				@media screen and (max-width: 414px) {
+					width: 70px;
+					height: 70px;
+				}
 			}
 
 			.header__title {
@@ -33,11 +37,17 @@
 					font-size: 24px;
 					font-weight: $bold;
 					cursor: pointer;
+					@media screen and (max-width: 414px) {
+						font-size: 18px;
+					}
 				}
 				.year {
 					margin: 0;
 					font-weight: $light;
 					font-size: 18px;
+					@media screen and (max-width: 414px) {
+						font-size: 16px;
+					}
 				}
 			}
 		}
