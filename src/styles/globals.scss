@@ -76,3 +76,37 @@ a {
 .list__container {
 	padding-bottom: 80px;
 }
+
+.grah__container {
+	display: flex;
+	justify-content: space-between;
+
+	.legends__container {
+		width: 95%;
+	}
+
+	.legend__container {
+		display: flex;
+		align-items: flex-start;
+		background: $container_color;
+		border-radius: $border_radius;
+		padding: $padding;
+		margin-bottom: 12px;
+
+		.description {
+			margin-left: 8px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		h3 {
+			margin: 0;
+		}
+	}
+
+	.legend {
+		width: 25px;
+		height: 25px;
+		border-radius: $border_radius;
+	}
+}

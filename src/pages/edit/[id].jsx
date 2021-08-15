@@ -8,25 +8,6 @@ import { getVideogameById, getToken } from '../../utils/services'
 
 export default function EditGame(props) {
 	const router = useRouter()
-	const { query } = router
-	const [videogameData, setVideogameData] = useState({})
-
-	// useEffect(() => {
-	// 	getToken('anthony')
-	// 		.then((res) => {
-	// 			getVideogameById(res.token, query.id)
-	// 				.then((res) => {
-	// 					console.log('detail', res)
-	// 					setVideogameData(res)
-	// 				})
-	// 				.catch((err) => {
-	// 					console.error(err)
-	// 				})
-	// 		})
-	// 		.catch((err) => {
-	// 			console.error(err)
-	// 		})
-	// }, [query])
 
 	return (
 		<Layout>
