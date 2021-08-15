@@ -9,6 +9,7 @@ import {
 import { useForm } from 'react-hook-form'
 import { ErrorMessage } from '@hookform/error-message'
 import router from 'next/router'
+import Loader from '../loader/loader'
 
 export default function VideogameForm({ type }) {
 	const [developers, setDeveloper] = useState([])
@@ -17,6 +18,7 @@ export default function VideogameForm({ type }) {
 	const [selectedDeveloper, setSelectedDeveloper] = useState(developers[0])
 	const [showErrors, setShowErrors] = useState(false)
 	const [token, setToken] = useState('')
+	const [loading, setLoading] = useState(true)
 	const {
 		register,
 		handleSubmit,
@@ -55,6 +57,9 @@ export default function VideogameForm({ type }) {
 					setDeveloper(options)
 				})
 				.catch((err) => console.error(err))
+				.finally(() => {
+					setLoading(false)
+				})
 		})
 	}, [])
 
@@ -102,101 +107,106 @@ export default function VideogameForm({ type }) {
 		}
 	}
 
-	return (
-		<form className="form" onSubmit={handleSubmit(onSubmit)}>
-			<div className="input__group">
-				<label className="label">Name:</label>
-				<input
-					className="input"
-					name="name"
-					type="text"
-					placeholder="type a name"
-					{...register('name', {
-						minLength: {
-							value: 3,
-							message: 'Name has to be at least 3 letters',
-						},
-						required: 'This fild is required',
-					})}
-				/>
-				<ErrorMessage
-					errors={errors}
-					name="name"
-					render={({ message }) => <span className="error">{message}</span>}
-				/>
-			</div>
-			<div className="input__group">
-				<label className="label">year:</label>
-				<input
-					className="input"
-					type="text"
-					name="year"
-					placeholder="Relase year"
-					pattern="^-?[0-9]\d*\.?\d*$"
-					{...register('year', {
-						minLength: {
-							value: 4,
-							message: 'Year has to be at least 4 digits',
-						},
-						required: 'This fild is required',
-					})}
-				/>
-				<ErrorMessage
-					errors={errors}
-					name="year"
-					render={({ message }) => <span className="error">{message}</span>}
-				/>
-			</div>
+	if (!loading) {
+		return (
+			<form className="form" onSubmit={handleSubmit(onSubmit)}>
+				<div className="input__group">
+					<label className="label">Name:</label>
+					<input
+						className="input"
+						name="name"
+						type="text"
+						placeholder="type a name"
+						{...register('name', {
+							minLength: {
+								value: 3,
+								message: 'Name has to be at least 3 letters',
+							},
+							required: 'This fild is required',
+						})}
+					/>
+					<ErrorMessage
+						errors={errors}
+						name="name"
+						render={({ message }) => <span className="error">{message}</span>}
+					/>
+				</div>
+				<div className="input__group">
+					<label className="label">year:</label>
+					<input
+						className="input"
+						type="text"
+						name="year"
+						placeholder="Relase year"
+						pattern="^-?[0-9]\d*\.?\d*$"
+						{...register('year', {
+							minLength: {
+								value: 4,
+								message: 'Year has to be at least 4 digits',
+							},
+							required: 'This fild is required',
+						})}
+					/>
+					<ErrorMessage
+						errors={errors}
+						name="year"
+						render={({ message }) => <span className="error">{message}</span>}
+					/>
+				</div>
 
-			<div className="input__group">
-				<label className="label">Platform</label>
-				<Select
-					options={consoles}
-					classNamePrefix="select"
-					onChange={(e) => handleSelected(e)}
-					value={selectedConsole}
-				/>
-				{showErrors && !selectedConsole && (
-					<span className="error">This fild is required</span>
-				)}
-			</div>
+				<div className="input__group">
+					<label className="label">Platform</label>
+					<Select
+						options={consoles}
+						classNamePrefix="select"
+						onChange={(e) => handleSelected(e)}
+						value={selectedConsole}
+					/>
+					{showErrors && !selectedConsole && (
+						<span className="error">This fild is required</span>
+					)}
+				</div>
 
-			<div className="input__group">
-				<label className="label">Developer</label>
-				<Select
-					options={developers}
-					classNamePrefix="select"
-					onChange={(e) => handleSelected(e)}
-					value={selectedDeveloper}
-				/>
-				{showErrors && !selectedDeveloper && (
-					<span className="error">This fild is required</span>
-				)}
-			</div>
+				<div className="input__group">
+					<label className="label">Developer</label>
+					<Select
+						options={developers}
+						classNamePrefix="select"
+						onChange={(e) => handleSelected(e)}
+						value={selectedDeveloper}
+					/>
+					{showErrors && !selectedDeveloper && (
+						<span className="error">This fild is required</span>
+					)}
+				</div>
 
-			<div className="input__group">
-				<label className="label">description</label>
-				<textarea
-					className="input"
-					type="text"
-					placeholder="Write a message"
-					rows="8"
-					name="description"
-					{...register('description', {
-						maxLength: {
-							value: 300,
-							message: 'Description to long, Use no more than 300 characters.',
-						},
-						required: 'This fild is required',
-					})}
-				/>
-				<ErrorMessage
-					errors={errors}
-					name="description"
-					render={({ message }) => <span className="error">{message}</span>}
-				/>
-			</div>
-			<input type="submit" className="buttom" value="Save" />
-		</form>
-	)
+				<div className="input__group">
+					<label className="label">description</label>
+					<textarea
+						className="input"
+						type="text"
+						placeholder="Write a message"
+						rows="8"
+						name="description"
+						{...register('description', {
+							maxLength: {
+								value: 300,
+								message:
+									'Description to long, Use no more than 300 characters.',
+							},
+							required: 'This fild is required',
+						})}
+					/>
+					<ErrorMessage
+						errors={errors}
+						name="description"
+						render={({ message }) => <span className="error">{message}</span>}
+					/>
+				</div>
+				<input type="submit" className="buttom" value="Save" />
+			</form>
+		)
+	} else {
+		return <Loader />
+	}
 }
