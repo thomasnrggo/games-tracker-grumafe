@@ -1,14 +1,16 @@
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight, faEdit } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import styles from './listCard.module.scss'
+import { useRouter } from 'next/router'
 
 let fakeImage =
 	'https://st3.depositphotos.com/23594922/31822/v/600/depositphotos_318221368-stock-illustration-missing-picture-page-for-website.jpg'
 
 export default function ListCard({ game }) {
-	const { console, description, name, year, image, developer } = game
+	const { console, description, name, year, image, developer, _id } = game
 	const [isOpen, setIsOpen] = useState(false)
+	const router = useRouter()
 
 	const handleCollapsable = () => {
 		setIsOpen(!isOpen)
@@ -53,6 +55,14 @@ export default function ListCard({ game }) {
 				<div className={styles.detail__group}>
 					<h5 className={styles.label}>Description:</h5>
 					<h4 className={styles.detail}>{description || '-'}</h4>
+				</div>
+				<div>
+					<button
+						className="buttom secundary"
+						onClick={() => router.push(`/edit/${_id}`)}
+					>
+						<FontAwesomeIcon icon={faEdit} /> Edit
+					</button>
 				</div>
 			</div>
 		</div>

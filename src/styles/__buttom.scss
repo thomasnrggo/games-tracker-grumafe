@@ -16,4 +16,20 @@
 		background: $accent_color;
 		color: $text_color;
 	}
+
+	&.secundary {
+		width: 100%;
+		color: darken($color: $white, $amount: 20%);
+		border: 1px solid transparent;
+		font-size: 16px;
+		&:hover {
+			background: transparent;
+			color: $accent_color;
+			border-color: $accent_color;
+		}
+
+		svg {
+			margin-right: 4px;
+		}
+	}
 }
